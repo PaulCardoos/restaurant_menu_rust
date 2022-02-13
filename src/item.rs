@@ -6,9 +6,9 @@ pub struct Item {
 }
 
 impl Item {
-    pub fn new(item_name:String, item_price:f32) -> Item {
+    pub fn new(item_name:&str, item_price:f32) -> Item {
         let i = Item{
-            name : item_name,
+            name : item_name.to_string(),
             price : item_price, 
             description : None,
         };
@@ -16,8 +16,8 @@ impl Item {
         
     }
 
-    pub fn item_description(mut self, description:String) -> Self {
-        self.description = Some(description);
+    pub fn item_description(mut self, description:&str) -> Self {
+        self.description = Some(description.to_string());
         self
     }
 

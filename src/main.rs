@@ -9,7 +9,6 @@ use std::io::BufRead;
 use std::io::prelude::*;
 
 
-
 fn print_greeting(){
     println!("********************\nMenu\n********************\n\n");
 }
@@ -32,10 +31,21 @@ fn main() {
     };
 
     // this is where ownership for items exits now
-    let items : Vec<String> = utils::retreive_file_contents(&file);
+    let contents : Vec<String> = utils::retreive_file_contents(&file);
+    let mut chicken : Vec<Vec<String>> = Vec::new();
     
-    println!("{:?}", items);
+    for i in &contents{ 
+        let s : Vec<String> = i.split(",").map(str::to_string).collect();
+        chicken.push(s);
+    }
 
+    let first_item = item::Item::new(&chicken[0][0], chicken[0][1].parse().unwrap())
+    .item_description(&chicken[0][2]);
+
+    println!("{:?}", first_item);
+
+
+    
 
 
     // read file contents into a vector
